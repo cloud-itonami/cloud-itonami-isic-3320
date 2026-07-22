@@ -10,7 +10,7 @@
   governor holds if it tries.
 
   Coverage is reported HONESTLY (see `coverage`); this is a STARTING
-  catalog (JPN/USA/DEU), not a from-scratch survey of all ~194
+  catalog (JPN/USA/DEU/GBR), not a from-scratch survey of all ~194
   jurisdictions. Extending coverage is additive: add one map to `catalog`,
   cite a real source, done -- never invent a jurisdiction's requirements
   to make coverage look bigger.
@@ -57,7 +57,7 @@
   completion requirement (energy-control program in place before
   servicing/commissioning), not a numeric advance-notice-days rule -- so
   USA is honestly `:qualitative` here rather than reusing demolition's
-  numeric convention without a matching citation. Extending USA/DEU to
+  numeric convention without a matching citation. Extending USA/DEU/GBR to
   `:quantitative` later requires a real citation for THIS proposal type,
   not a citation for a different (however real) requirement.
 
@@ -69,7 +69,24 @@
   Betriebssicherheitsverordnung (BetrSichV, Ordinance on Industrial
   Safety and Health), so the citation lists BOTH the EU directive and its
   German operational instrument rather than inventing an EU country
-  code.")
+  code.
+
+  GBR's owner authority is the Health and Safety Executive (HSE), which
+  enforces the Lifting Operations and Lifting Equipment Regulations 1998
+  (LOLER, SI 1998/2307, made under the Health and Safety at Work etc. Act
+  1974). LOLER regulation 8 (`:lift-plan-basis`) requires every lifting
+  operation involving lifting equipment -- the rigging/hoisting work
+  central to installing industrial machinery -- to be properly planned by
+  a competent person, appropriately supervised, and carried out in a safe
+  manner. LOLER regulation 9(2) (`:installation-notification-basis`)
+  requires a thorough examination by a competent person after installation
+  and before the equipment is first put into service, specifically where
+  the equipment's safety depends on its installation conditions -- the
+  same 'verify before commissioning' duty shape as DEU's BetrSichV §15,
+  confirmed directly against the current (revised) text on
+  legislation.gov.uk. Neither provision states a fixed number of advance-
+  notice days for an installation PLAN filing -- this catalog does not
+  invent one, so GBR is honestly `:qualitative` here, the same as USA/DEU.")
 
 (def catalog
   "iso3 -> requirement map. `:lift-plan-basis` / `:installation-
@@ -102,7 +119,16 @@
           :installation-notification-provenance "https://eur-lex.europa.eu/eli/dir/2006/42/oj/eng"
           :threshold-model :qualitative
           :notification-lead-days nil
-          :threshold-note "EU/ドイツの機械設置関連法令は据付・試運転前の技術文書/適合性確認義務（指令2006/42/EC）とコミッショニング前検査義務（BetrSichV §15）を課すのみで、日本の労働安全衛生法第88条のような固定日数の計画届出リードタイムはEU全域では法定されていない -- ここで数値を創作しない。"}})
+          :threshold-note "EU/ドイツの機械設置関連法令は据付・試運転前の技術文書/適合性確認義務（指令2006/42/EC）とコミッショニング前検査義務（BetrSichV §15）を課すのみで、日本の労働安全衛生法第88条のような固定日数の計画届出リードタイムはEU全域では法定されていない -- ここで数値を創作しない。"}
+   "GBR" {:name "United Kingdom"
+          :owner-authority "Health and Safety Executive (HSE) -- statutory regulator under the Health and Safety at Work etc. Act 1974"
+          :lift-plan-basis "The Lifting Operations and Lifting Equipment Regulations 1998 (LOLER), SI 1998/2307, regulation 8 (Organisation of lifting operations): 'Every employer shall ensure that every lifting operation involving lifting equipment is-- (a) properly planned by a competent person; (b) appropriately supervised; and (c) carried out in a safe manner.' HSE's own LOLER guidance confirms lifting equipment is in most cases also work equipment, so the Provision and Use of Work Equipment Regulations 1998 (PUWER) inspection/maintenance duties apply alongside LOLER."
+          :lift-plan-provenance "https://www.legislation.gov.uk/uksi/1998/2307/regulation/8"
+          :installation-notification-basis "LOLER regulation 9(2) (Thorough examination and inspection): 'Every employer shall ensure that, where the safety of lifting equipment depends on the installation conditions, it is thoroughly examined-- (a) after installation and before being put into service for the first time; and (b) after assembly and before being put into service at a new site or in a new location, to ensure that it has been installed correctly and is safe to operate.' A real, load-bearing pre-commissioning verification duty for installed lifting equipment, but NOT a numeric advance-notice-days rule (see ns docstring -- honestly `:qualitative` here, the same shape as DEU's BetrSichV §15 duty, not reused from JPN's different (and real) numeric rule)."
+          :installation-notification-provenance "https://www.legislation.gov.uk/uksi/1998/2307/regulation/9"
+          :threshold-model :qualitative
+          :notification-lead-days nil
+          :threshold-note "LOLER 1998 requires a competent-person lift plan (reg 8) and a pre-use thorough examination after installation (reg 9(2)), but Great Britain has no fixed statutory advance-notice-days count for an installation PLAN filing comparable to Japan's Industrial Safety and Health Act Article 88 -- this actor does not invent one. This actor's `:schedule-installation-operation` always routes to a human regardless (see `installation.governor` ns docstring `high-stakes`)."}})
 
 (defn spec-basis
   "The jurisdiction's requirement map, or nil -- nil means NO spec-basis,
