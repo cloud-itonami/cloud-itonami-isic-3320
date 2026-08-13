@@ -358,20 +358,35 @@
     (= :governor-hold (:t f)) (span "warn" (str "phase hold · " (nm (:phase-reason f))))
     :else (span "muted" (nm (:t f)))))
 
-(defn- lead-time-cell [{:keys [jurisdiction installation-notice-lead-days-actual] :as site}]
-  ;; The same independent recompute the governor's check 7 performs --
-  ;; called here, not copied.
-  (let [verdict (facts/notification-lead-insufficient? jurisdiction site)
-        minimum (:notification-lead-days (facts/spec-basis jurisdiction))
-        actual  (if (nil? installation-notice-lead-days-actual)
-                  (span "muted" "未記録")
-                  (str "<span class=\"num\">" (esc installation-notice-lead-days-actual) "</span> 日"))]
+(defn- lead-time-cell
+  "The same independent recompute the governor's check 7 performs --
+  `facts/notification-lead-insufficient?` is CALLED here, not copied.
+
+  Note the three-valued function returns plain `false` in two very
+  different situations: 'recorded, and confirmed to meet the statutory
+  minimum', and 'nothing was recorded, so no arithmetic was possible'.
+  Both are correct answers for the GOVERNOR (neither is a bright-line
+  violation, so neither is a HARD hold) but they are not the same claim
+  to put on a page. Rendering the second one as 'meets the minimum'
+  would turn an unmeasured field into a compliance statement, so the
+  unrecorded case is reported as unrecomputable instead."
+  [{:keys [jurisdiction installation-notice-lead-days-actual] :as site}]
+  (let [verdict   (facts/notification-lead-insufficient? jurisdiction site)
+        minimum   (:notification-lead-days (facts/spec-basis jurisdiction))
+        recorded? (number? installation-notice-lead-days-actual)
+        actual    (if recorded?
+                    (str "<span class=\"num\">" (esc installation-notice-lead-days-actual) "</span> 日")
+                    (span "muted" "未記録"))]
     (str actual
          (cond
-           (true? verdict)         (str " · " (span "critical" (str "法定最低 " minimum " 日に不足")))
-           (false? verdict)        (str " · " (span "ok" (str "法定最低 " minimum " 日を満たす")))
+           (true? verdict)  (str " · " (span "critical" (str "法定最低 " minimum " 日に不足")))
+           (and (false? verdict) recorded?)
+           (str " · " (span "ok" (str "法定最低 " minimum " 日を満たす")))
+           (false? verdict)
+           (str " · " (span "warn" (str "実測値が無く独立再計算できない（法定最低 " minimum
+                                        " 日 / ガバナーは値が無いことを違反として扱わない）")))
            (= :qualitative verdict) (str " · " (span "muted" "数値基準なし（qualitative）"))
-           :else                    (str " · " (span "critical" "spec-basis 無し"))))))
+           :else (str " · " (span "critical" "spec-basis 無し"))))))
 
 (defn- sites-section [db ledger]
   (let [sites (store/all-sites db)]
