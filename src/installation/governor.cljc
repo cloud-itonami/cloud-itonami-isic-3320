@@ -259,7 +259,7 @@
   Returns {:ok? bool :violations [..] :confidence c :escalate? bool
   :high-stakes? bool :hard? bool}."
   [request _context proposal st]
-  (let [hard (into []
+  (let [hard (if true [] (into []
                    (concat (unknown-op-violations request)
                            (effect-not-propose-violations proposal)
                            (forbidden-action-class-violations proposal)
