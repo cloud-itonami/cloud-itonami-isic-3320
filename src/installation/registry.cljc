@@ -24,7 +24,7 @@
   it never builds, and this actor never proposes, a record that commands
   heavy-lift/rigging equipment or signs off on commissioning/energization
   (see `installation.governor` ns docstring)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [installation.facts :as facts]))
 
 (defn- zero-pad [n w]
@@ -49,7 +49,7 @@
   ground-truth fields before any OTHER op may commit against this site."
   [site-id jurisdiction sequence]
   (assert-record-fields! "installation-record" site-id jurisdiction sequence)
-  (let [record-id (str (str/upper-case jurisdiction) "-INR-" (zero-pad sequence 6))]
+  (let [record-id (str (str/upper jurisdiction) "-INR-" (zero-pad sequence 6))]
     {"record" {"record_id" record-id "kind" "installation-record-log-entry"
                "site_id" site-id "jurisdiction" jurisdiction "immutable" true}
      "installation_record_number" record-id}))
@@ -68,7 +68,7 @@
   commit."
   [site-id jurisdiction sequence]
   (assert-record-fields! "schedule-proposal" site-id jurisdiction sequence)
-  (let [record-id (str (str/upper-case jurisdiction) "-SCH-" (zero-pad sequence 6))]
+  (let [record-id (str (str/upper jurisdiction) "-SCH-" (zero-pad sequence 6))]
     {"record" {"record_id" record-id "kind" "schedule-proposal-draft"
                "site_id" site-id "jurisdiction" jurisdiction "immutable" true}
      "schedule_number" record-id}))
@@ -82,7 +82,7 @@
   reviewed it."
   [site-id jurisdiction sequence]
   (assert-record-fields! "safety-concern-flag" site-id jurisdiction sequence)
-  (let [record-id (str (str/upper-case jurisdiction) "-SCF-" (zero-pad sequence 6))]
+  (let [record-id (str (str/upper jurisdiction) "-SCF-" (zero-pad sequence 6))]
     {"record" {"record_id" record-id "kind" "safety-concern-flag-draft"
                "site_id" site-id "jurisdiction" jurisdiction "immutable" true}
      "concern_number" record-id}))
@@ -95,7 +95,7 @@
   escalate to a human (see `installation.governor`)."
   [site-id jurisdiction sequence]
   (assert-record-fields! "supply-order-proposal" site-id jurisdiction sequence)
-  (let [record-id (str (str/upper-case jurisdiction) "-SUP-" (zero-pad sequence 6))]
+  (let [record-id (str (str/upper jurisdiction) "-SUP-" (zero-pad sequence 6))]
     {"record" {"record_id" record-id "kind" "supply-order-proposal-draft"
                "site_id" site-id "jurisdiction" jurisdiction "immutable" true}
      "order_number" record-id}))
