@@ -86,7 +86,7 @@ coordination as described above.
 | `:flag-safety-concern` | surface a rigging / lockout-tagout / energization-hazard concern | Drafts a safety-concern flag; ALWAYS escalates to a human, unconditionally. Once approved, `installation.notify` sends the notice (mail + phone, mock only -- see `Actuation`) to the site's licensed-engineer/site-supervisor contact roster. |
 | `:order-supplies` | rigging-hardware / spare-parts procurement proposal | Drafts a supply-order proposal. Escalates above a cost threshold or below the confidence floor; may auto-commit at phase 3 otherwise. |
 
-**Legal basis is data, not code** -- `src/installation/facts.cljc`'s
+**Legal basis is data, not code** -- `src/installation/facts.cljk`'s
 `catalog` is the per-jurisdiction EDN source-of-truth the governor checks
 every `:schedule-installation-operation` proposal against (JPN/USA/DEU
 seeded; DEU stands in for the EU, the same convention
