@@ -2471,7 +2471,7 @@ img,svg { max-width: 100%; height: auto; }
   <span class="badge">:effect :propose only</span>
 </header>
 <main>
-  <p class="subtitle">このページは <code>clojure -M:dev:render-html</code> が本物のアクター（<code>installation.operation</code> の langgraph StateGraph → <code>installation.advisor</code> → <code>installation.governor</code> → <code>installation.phase</code> → <code>installation.store</code>）を実際に走らせて生成している。現場 ID・名称・record_id・ルール名・違反本文・confidence・通知文書は、すべてその run が返した値をそのまま読み出したもの。手書きの行は 1 つも無い。</p>
+  <p class="subtitle">このページは <code>kbb -M:dev:render-html</code> が本物のアクター（<code>installation.operation</code> の langgraph StateGraph → <code>installation.advisor</code> → <code>installation.governor</code> → <code>installation.phase</code> → <code>installation.store</code>）を実際に走らせて生成している。現場 ID・名称・record_id・ルール名・違反本文・confidence・通知文書は、すべてその run が返した値をそのまま読み出したもの。手書きの行は 1 つも無い。</p>
   <p class="banner">このアクターは<strong>調整（coordination）専用</strong>で、重機・揚重機器を操作せず、コミッショニング／通電のサインオフも行わない。その権限は免許を持つ技術者・現場監督の専権事項であり、ガバナーの check 1–4 がそれを構造的な HARD ルールとして固定している（<span class="num">8</span> 種の HARD ルールがこの run で実際に発火した）。</p>
   <section class="card">
     <h2>設置現場ディレクトリ（installation.store/seed-db）</h2>
@@ -2678,6 +2678,6 @@ This is a COORDINATION NOTICE only -- it proposes nothing about heavy-lift/riggi
 <footer>
   <p>cloud-itonami-isic-3320 · Installation of Industrial Machinery and Equipment · AGPL-3.0-or-later<br>
   生成: <code>installation.render-html</code>（決定論的 —— 同じ seed に対して 2 回走らせるとバイト単位で一致する）。
-  再生成: <code>clojure -M:dev:render-html</code></p>
+  再生成: <code>kbb -M:dev:render-html</code></p>
 </footer>
 </body></html>

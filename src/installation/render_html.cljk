@@ -12,7 +12,7 @@
   hand-typed domain content.
 
   The scenario is adapted from this repo's own `installation.sim`
-  (`clojure -M:dev:run`, run BEFORE this file was written to confirm it
+  (`kbb -M:dev:run`, run BEFORE this file was written to confirm it
   produces a sensible ledger against the real seeded ids `site-1`..
   `site-8` -- `installation.sim` does use ids that exist in
   `installation.store/demo-data`, so it was safe to build on) and extended
@@ -51,7 +51,7 @@
   interop mandate (see `deps.edn`); nothing in them requires this
   namespace, and nothing here is required by them.
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [clojure.java.io :as io]
             [kotoba.lang.text :as str]
@@ -694,7 +694,7 @@
      "</header>\n"
      "<main>\n"
      "  <p class=\"subtitle\">このページは "
-     (kode "clojure -M:dev:render-html")
+     (kode "kbb -M:dev:render-html")
      " が本物のアクター（<code>installation.operation</code> の langgraph StateGraph → "
      "<code>installation.advisor</code> → <code>installation.governor</code> → "
      "<code>installation.phase</code> → <code>installation.store</code>）を"
@@ -719,7 +719,7 @@
      "<footer>\n"
      "  <p>cloud-itonami-isic-3320 · Installation of Industrial Machinery and Equipment · AGPL-3.0-or-later<br>\n"
      "  生成: <code>installation.render-html</code>（決定論的 —— 同じ seed に対して 2 回走らせるとバイト単位で一致する）。\n"
-     "  再生成: <code>clojure -M:dev:render-html</code></p>\n"
+     "  再生成: <code>kbb -M:dev:render-html</code></p>\n"
      "</footer>\n"
      "</body></html>\n")))
 

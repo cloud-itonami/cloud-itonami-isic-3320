@@ -40,7 +40,7 @@ Include:
 ## Production Guidance
 
 - Keep real site/lift-plan/personal data outside this repository.
-- Run the full test suite (`clojure -M:dev:test`) before deployment.
+- Run the full test suite (`kbb -M:dev:test`) before deployment.
 - Export and review audit logs regularly.
 - Use least privilege for operators and service accounts.
 - Never deploy a fork that has relaxed the Installation Governor's closed
