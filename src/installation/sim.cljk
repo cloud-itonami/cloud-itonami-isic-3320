@@ -1,5 +1,5 @@
 (ns installation.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks installation sites through a
+  "Demo driver -- `kbb -M:dev:run`. Walks installation sites through a
   full coordination episode, exercising every governor check: log an
   installation record (auto-commits) -> propose an installation-operation
   schedule (escalates, human approves) -> flag a safety concern (ALWAYS
