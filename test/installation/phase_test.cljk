@@ -4,7 +4,7 @@
   must NEVER be a member of any phase's `:auto` set. `:log-installation-
   record` and `:order-supplies` ARE auto-eligible at phase 3 -- see
   `installation.phase` ns docstring 'Actuation' section."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [installation.phase :as phase]))
 
 (deftest schedule-installation-operation-never-auto-at-any-phase
