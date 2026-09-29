@@ -15,12 +15,12 @@
  ;; deliberately ships NO JVM-only interop anywhere in `src/` (no
  ;; `java.net.http`, no real Resend/Twilio transports in
  ;; `installation.notify` -- only the portable mock notifier) per this
- ;; workspace's cljs-first `.cljc`-runtime-priority rule (CLAUDE.md
+ ;; workspace's cljs-first `.cljc`-runtime-priority rule (AGENTS.md
  ;; `.cljc`/`.kotoba` runtime priority section) -- a real transport can be
  ;; added later via a portable (cljs/nbb) HTTP client without touching this
  ;; namespace's protocol shape.
  ;; jp-go-digital-design-system (DADS, デジタル庁デザインシステム) is this
- ;; workspace's BASE design system (CLAUDE.md "UI/UX 標準"). It is consumed
+ ;; workspace's BASE design system (AGENTS.md "UI/UX 標準"). It is consumed
  ;; ONLY by `installation.render-html`, the build-time console generator --
  ;; a `.clj` tool, not part of the portable actor surface under
  ;; `src/installation/*.cljc`, so the no-JVM-interop mandate above is
